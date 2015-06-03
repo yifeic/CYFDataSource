@@ -7,21 +7,23 @@
 //
 
 @import UIKit;
-@class CYFDataSourceCell;
+#import "CYFDataSourceCell.h"
 #import "CYFDataSourceBlocks.h"
 
-typedef void(^CYFDataSourceAddCellBlock)(CYFDataSourceCell *dataSourceCell, NSInteger rowIndex);
+typedef void(^CYFDataSourceAddCellBlock)(CYFDataSourceCell *cell, NSInteger rowIndex);
 
 @interface CYFDataSourceSection : NSObject
 
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic) CGFloat headerHeight;
+@property (nonatomic, strong, readonly) NSMutableArray *cells;
 @property (nonatomic, readonly) NSInteger sectionIndex;
+@property (nonatomic) NSInteger numberOfRows;
 @property (nonatomic, strong) CYFDataSourceCellForRowBlock cellForRowBlock;
 @property (nonatomic, strong) CYFDataSourceSelectRowBlock selectRowBlock;
 @property (nonatomic, strong) CYFDataSourceHeightForRowBlock heightForRowBlock;
 
 - (void)addCell:(CYFDataSourceAddCellBlock)block;
-- (CYFDataSourceCell *)cellAtIndex:(NSInteger)index;
+- (UITableViewCell *)cellAtIndex:(NSInteger)index;
 
 @end

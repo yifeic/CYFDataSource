@@ -7,7 +7,6 @@
 //
 
 #import "CYFDataSource.h"
-#import "CYFDataSourceSection.h"
 
 @interface CYFDataSource ()
 @property (nonatomic, weak) UITableView *tableView;
@@ -22,8 +21,6 @@
     if (self) {
         _tableView = tableView;
         _sections = [NSMutableArray array];
-        
-        
     }
     return self;
 }
@@ -32,6 +29,38 @@
     CYFDataSourceSection *section = [[CYFDataSourceSection alloc] init];
     block(section, self.sections.count);
     [self.sections addObject:section];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex {
+    CYFDataSourceSection *section = self.sections[sectionIndex];
+    return MAX(section.cells.count, section.numberOfRows);
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.sections.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CYFDataSourceSection *section = self.sections[indexPath.section];
+    
+    if (indexPath.row < section.cells.count) {
+        CYFDataSourceCell *cell = section.cells[indexPath.row];
+        return cell.cellForRowBlock(tableView, indexPath);
+    }
+    else {
+        NSAssert(indexPath.row < section.numberOfRows, @"section:%ld, row:%ld, out of range", (long)indexPath.section, (long)indexPath.row);
+        return section.cellForRowBlock(tableView, indexPath);
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)sectionIndex {
+    CYFDataSourceSection *section = self.sections[sectionIndex];
+    return section.headerHeight;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)sectionIndex {
+    CYFDataSourceSection *section = self.sections[sectionIndex];
+    return section.headerView;
 }
 
 @end

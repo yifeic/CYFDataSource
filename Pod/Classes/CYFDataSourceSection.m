@@ -7,7 +7,6 @@
 //
 
 #import "CYFDataSourceSection.h"
-#import "CYFDataSourceCell.h"
 
 @interface CYFDataSourceSection ()
 
@@ -22,6 +21,7 @@
     self = [super init];
     if (self) {
         _cells = [NSMutableArray array];
+        _headerHeight = 10;
     }
     return self;
 }
