@@ -7,7 +7,14 @@
 //
 
 @import UIKit;
+@class CYFDataSourceSection;
+
+typedef void(^CYFDataSourceAddSectionBlock)(CYFDataSourceSection *section, NSInteger sectionIndex);
 
 @interface CYFDataSource : NSObject
+
+- (instancetype)initWithTableView:(UITableView *)tableView;
+
+- (void)addSection:(CYFDataSourceAddSectionBlock)block;
 
 @end
