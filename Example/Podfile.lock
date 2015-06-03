@@ -1,0 +1,20 @@
+PODS:
+  - CYFDataSource (0.1.0)
+  - Expecta (1.0.0)
+  - Specta (1.0.1)
+
+DEPENDENCIES:
+  - CYFDataSource (from `../`)
+  - Expecta
+  - Specta
+
+EXTERNAL SOURCES:
+  CYFDataSource:
+    :path: ../
+
+SPEC CHECKSUMS:
+  CYFDataSource: 08d7c8f22b411d6aab724adee35b7a934ecfe7d6
+  Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
+  Specta: 097be314a75de103703a3bf9a529dc1a398509d7
+
+COCOAPODS: 0.37.2
