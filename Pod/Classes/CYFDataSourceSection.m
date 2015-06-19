@@ -22,6 +22,7 @@
     if (self) {
         _cells = [NSMutableArray array];
         _headerHeight = 10;
+        _rowHeight = 44;
     }
     return self;
 }

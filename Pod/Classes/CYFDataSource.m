@@ -40,6 +40,14 @@
     return self.sections.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CYFDataSourceSection *section = self.sections[indexPath.section];
+    if (section.heightForRowBlock) {
+        return section.heightForRowBlock(tableView, indexPath);
+    }
+    return section.rowHeight;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CYFDataSourceSection *section = self.sections[indexPath.section];
     

@@ -19,6 +19,7 @@ typedef void(^CYFDataSourceAddCellBlock)(CYFDataSourceCell *cell, NSInteger rowI
 @property (nonatomic, strong, readonly) NSMutableArray *cells;
 @property (nonatomic, readonly) NSInteger sectionIndex;
 @property (nonatomic) NSInteger numberOfRows;
+@property (nonatomic) CGFloat rowHeight;
 @property (nonatomic, strong) CYFDataSourceCellForRowBlock cellForRowBlock;
 @property (nonatomic, strong) CYFDataSourceSelectRowBlock selectRowBlock;
 @property (nonatomic, strong) CYFDataSourceHeightForRowBlock heightForRowBlock;
