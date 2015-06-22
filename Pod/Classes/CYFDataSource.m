@@ -61,6 +61,14 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CYFDataSourceSection *section = self.sections[indexPath.section];
+    if (!section.selectRowBlock) {
+        return;
+    }
+    section.selectRowBlock(tableView, indexPath);
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)sectionIndex {
     CYFDataSourceSection *section = self.sections[sectionIndex];
     return section.headerHeight;
