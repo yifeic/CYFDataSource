@@ -63,10 +63,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CYFDataSourceSection *section = self.sections[indexPath.section];
-    if (!section.selectRowBlock) {
-        return;
+    if (indexPath.row < section.cells.count) {
+        CYFDataSourceCell *cell = section.cells[indexPath.row];
+        if (cell.selectRowBlock) {
+            cell.selectRowBlock(tableView, indexPath);
+        }
     }
-    section.selectRowBlock(tableView, indexPath);
+    else {
+        NSAssert(indexPath.row < section.numberOfRows, @"section:%ld, row:%ld, out of range", (long)indexPath.section, (long)indexPath.row);
+        if (section.selectRowBlock) {
+            section.selectRowBlock(tableView, indexPath);
+        }
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)sectionIndex {
